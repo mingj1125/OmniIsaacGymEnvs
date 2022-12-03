@@ -5,23 +5,21 @@
 # and any modifications thereto.  Any use, reproduction, disclosure or
 # distribution of this software and related documentation without an express
 # license agreement from NVIDIA CORPORATION is strictly prohibited.
-#
 
 from typing import Optional
 
-from omni.isaac.core.robots.robot import Robot
-from omni.isaac.core.utils.nucleus import get_assets_root_path
+from omni.isaac.core.prims import GeometryPrim
 from omni.isaac.core.utils.stage import add_reference_to_stage
 
 import numpy as np
 import torch
 
 
-class CrackerBox(Robot):
+class Bunny(GeometryPrim):
     def __init__(
         self,
         prim_path: str,
-        name: Optional[str] = "CrackerBox",
+        name: Optional[str] = "Bunny",
         usd_path: Optional[str] = None,
         translation: Optional[torch.tensor] = None,
         orientation: Optional[torch.tensor] = None,
@@ -32,16 +30,17 @@ class CrackerBox(Robot):
         self._name = name
 
         if self._usd_path is None:
-            assets_root_path = get_assets_root_path()
-            if assets_root_path is None:
-                carb.log_error("Could not find Isaac Sim assets folder")
-            self._usd_path = assets_root_path + "/Isaac/Robots/Carter/carter_v2.usd"
+            self._usd_path = "./usd_data/bunny.usd"
 
         add_reference_to_stage(self._usd_path, prim_path)
+
+        self._position = torch.tensor([0.0, 0.0, 1.8]) if translation is None else translation
+        self._orientation = torch.tensor([0.70711, 0.70711, 0.0, 0.0]) if orientation is None else orientation
+
 
         super().__init__(
             prim_path=prim_path,
             name=name,
-            translation=translation,
-            orientation=orientation,
+            translation=self._position,
+            orientation=self._orientation
         )

@@ -47,5 +47,4 @@ class Table(Robot):
             name=name,
             translation=translation,
             orientation=orientation,
-            articulation_controller=None,
         )
