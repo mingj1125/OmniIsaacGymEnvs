@@ -1,5 +1,22 @@
 # Omniverse Isaac Gym Reinforcement Learning Environments for Isaac Sim
 
+### Additional notes for new task from me: 
+
+Task name: `MovingOnTheTab`
+
+To train:
+
+```bash
+PYTHON_PATH scripts/rlgames_train.py task=MovingOnTheTab
+```
+
+Multi-threaded training:
+
+```bash
+PYTHON_PATH scripts/rlgames_train_mt.py task=MovingOnTheTab
+```
+If you want to load bunny object to the scene, uncomment the function `get_bunny()` in the file `omniisaacgymenvs/tasks/MovingOnTheTab.py`. It currently loads a usd file mesh of Stanford Bunny and adds soft body properties during setup. 
+
 ### About this repository
 
 This repository contains Reinforcement Learning examples that can be run with the latest release of [Isaac Sim](https://docs.omniverse.nvidia.com/app_isaacsim/app_isaacsim/overview.html). RL examples are trained using PPO from [rl_games](https://github.com/Denys88/rl_games) library and examples are built on top of Isaac Sim's `omni.isaac.core` and `omni.isaac.gym` frameworks.
