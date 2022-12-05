@@ -7,6 +7,7 @@
 # license agreement from NVIDIA CORPORATION is strictly prohibited.
 
 from typing import Optional
+import os
 
 from omni.isaac.core.prims import GeometryPrim
 from omni.isaac.core.utils.stage import add_reference_to_stage
@@ -30,7 +31,8 @@ class Bunny(GeometryPrim):
         self._name = name
 
         if self._usd_path is None:
-            self._usd_path = "./usd_data/bunny.usd"
+            path = os.getcwd()
+            self._usd_path = path + "/usd_data/bunny.usd"
 
         add_reference_to_stage(self._usd_path, prim_path)
 
